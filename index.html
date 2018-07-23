@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<title>animation动画演示-手机端</title>
+		<link rel="stylesheet" href="css/index.css" />	
+	</head>
+	<body>
+		<div class="page">
+			<div class="c_title">
+				<div class="t_info" data-for="normal">
+					<h2 class="page__title">demo演示-手机端</h2>
+					<p class="page__desc">点击图片对应的内容就会显示</p>
+				</div>
+				<div class="t_info" data-for="dc1" style="display: none;">
+					<h2 class="page__title">点餐外卖系统-首页</h2>
+					<p class="page__desc">点击菜品图片即可点菜，灵活方便快速选择您需要的菜品</p>
+				</div>
+				<div class="t_info" data-for="dc2" style="display: none;">
+					<h2 class="page__title">点餐外卖系统-下单</h2>
+					<p class="page__desc">下单结算再次确认编辑已点菜品，支付方式：微信支付</p>
+				</div>
+				<div class="t_info" data-for="dc3" style="display: none;">
+					<h2 class="page__title">点餐外卖系统-订单查看</h2>
+					<p class="page__desc">未付款订单可再次支付，可取消</p>
+				</div>
+			</div>
+			<div class="imgs_list">
+				<div class="j_layer img_one j_transform" data-name="dc1"></div>
+				<div class="j_layer img_two j_transform" data-name="dc2"></div>
+				<div class="j_layer img_three j_transform" data-name="dc3"></div>
+			</div>
+			
+		</div>
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js" ></script>
+		<script>
+			//隐藏其他图片
+			function hideOhter(){
+				$(".imgs_list .j_layer").each(function(){
+					var $this = $(this);
+					var isc = $this.hasClass("show");
+					if(!isc){
+						$this.css("visibility","hidden");
+					}else{
+						$this.css("visibility","visible");
+					}
+				});
+			}
+			//显示其他图片
+			function showOhter(){
+				$(".imgs_list .j_layer").each(function(){
+					var $this = $(this);
+					var isc = $this.hasClass("show");
+					if(!isc){
+						$this.css("visibility","visible");
+					} 
+				});
+			}
+			
+			//图片描述 
+			function showdesc(name){
+				$(".c_title .t_info").each(function(){
+					var $this = $(this);
+					var for_data = $this.data("for");
+					if(for_data == name){
+						$this.css("display","block");
+					}else{
+						$this.css("display","none");
+					}
+				});
+			}
+			//关闭图片描述
+			function hidedesc(){
+				$(".c_title .t_info").each(function(){
+					var $this = $(this);
+					var for_data = $this.data("for");
+					if(for_data == "normal"){
+						$this.css("display","block");
+					}else{
+						$this.css("display","none");
+					}
+				});
+			}
+			$(function(){
+				var one = $(".imgs_list .img_one"),
+					two = $(".imgs_list .img_two"),
+					three = $(".imgs_list .img_three");
+				three.addClass("annmat");
+				var threedom = three[0];
+				threedom.addEventListener("animationend", function() {
+				    two.addClass("annmat");
+				})
+				var twodom = two[0];
+				twodom.addEventListener("animationend", function() {
+				    one.addClass("annmat");
+				})
+				
+				//点击
+				$(document).on("click",".j_layer",function(){
+					var $this = $(this);
+					var isc = $this.hasClass("j_transform");
+					if(isc){
+						$this.removeClass("j_transform");
+						$this.addClass("show");
+						hideOhter();
+						var name = $this.data("name");
+						showdesc(name);
+					}else{
+						$this.addClass("j_transform");
+						$this.removeClass("show");
+						showOhter();
+						hidedesc();
+					}
+				});
+			});
+		</script>
+	</body>
+</html>
