@@ -40,12 +40,12 @@
 		    visibility: hidden;
 		}
 		.j_layer.img_one{
-			background: url(../img/diancan3.jpg) no-repeat 50%;
+			background: url(../img/diancan1.jpg) no-repeat 50%;
 			background-size: contain;
     		z-index: 3;
 		}
 		.j_layer.img_two{
-			background: url(../img/diancan3.jpg) no-repeat 50%;
+			background: url(../img/diancan2.jpg) no-repeat 50%;
 			background-size: contain;
 			z-index:2;
 		}
